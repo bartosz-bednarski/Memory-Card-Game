@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import classes from "./cardsBox.module.scss";
 import CartItem from "../cardItem/CartItem";
 const CardsBox: React.FC = () => {
-  const checkArr = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
   const fourXfour = [
     { value: 1, id: "c1", matched: false, selected: false },
     { value: 2, id: "c2", matched: false, selected: false },
@@ -36,6 +35,7 @@ const CardsBox: React.FC = () => {
     lastCardValue: null,
     lastCardId: null,
   });
+  const [preventMultipleClicks, setPreventMultipleClicks] = useState(false);
   // const resetPairOfCardsHandler = () => {
   //   setCheckMatch({ cardValue: null, cardId: null });
   // };
@@ -43,6 +43,7 @@ const CardsBox: React.FC = () => {
     value,
     id
   ) => {
+    setPreventMultipleClicks(true);
     if (checkMatch.lastCardValue === null) {
       const newData = checkMatch.data.map((item) => {
         if (item.id === id) {
@@ -53,6 +54,7 @@ const CardsBox: React.FC = () => {
       });
 
       setCheckMatch({ data: newData, lastCardValue: value, lastCardId: id });
+      setPreventMultipleClicks(false);
     } else {
       if (checkMatch.lastCardValue === value && checkMatch.lastCardId !== id) {
         const modifiedData = checkMatch.data.map((item) => {
@@ -67,6 +69,7 @@ const CardsBox: React.FC = () => {
           lastCardId: null,
           lastCardValue: null,
         });
+        setPreventMultipleClicks(false);
       } else {
         const showCardData = checkMatch.data.map((item) => {
           if (item.id === id) {
@@ -95,6 +98,7 @@ const CardsBox: React.FC = () => {
             lastCardId: null,
             lastCardValue: null,
           });
+          setPreventMultipleClicks(false);
         }, 1000);
       }
     }
@@ -109,8 +113,8 @@ const CardsBox: React.FC = () => {
           onSetCheckMatch={setCheckMatchHandler}
           id={item.id}
           key={item.id}
-          matched={item.matched}
           selected={item.selected}
+          preventMultipleClicks={preventMultipleClicks}
         />
       ))}
     </div>
