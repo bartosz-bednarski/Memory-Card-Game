@@ -1,0 +1,33 @@
+.game-cat-button {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  border: 2px solid yellow;
+  color: yellow;
+  height: 150px;
+  width: 150px;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  &:hover {
+    background-color: rgb(13, 240, 13);
+    border: 2px solid yellow;
+    color: black;
+    cursor: pointer;
+    p {
+      color: black;
+    }
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.5rem;
+    color: rgb(13, 240, 13);
+  }
+}

@@ -1,21 +1,25 @@
 .moves-counter {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background-color: yellow;
   color: black;
-  justify-content: center;
-  width: max-content;
+  justify-content: flex-start;
+  width: 200px;
+  height: 150px;
   border-radius: 5px;
   &__count-value {
     background-color: black;
     color: yellow;
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
     border: 2px solid yellow;
+    padding: 1rem;
   }
   &__title {
     color: black;
     font-weight: 600;
     padding: 10px;
+    text-align: center;
   }
 }
