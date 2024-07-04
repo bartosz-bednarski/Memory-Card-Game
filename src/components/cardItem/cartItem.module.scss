@@ -1,7 +1,13 @@
 .card-item {
+  display: flex;
   background-color: green;
   width: 7rem;
   height: 200px;
   border-radius: 10px;
   border: 2px solid black;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  font-size: 3rem;
+  font-weight: 700;
 }
