@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
 import classes from "./cardsBox.module.scss";
 import CartItem from "../cardItem/CartItem";
-import { fourXfour } from "../../utils/data/gamesTypes";
 import { shuffleArray } from "../../utils/scripts/shuffle";
+import { Card, GameTypes } from "../../types/games";
 const CardsBox: React.FC<{
   restart: boolean;
+  gameType: { data: Card[]; title: GameTypes };
   onRestartComplete: () => void;
   onSetNumberOfMoves: () => void;
-}> = ({ restart, onRestartComplete, onSetNumberOfMoves }) => {
+}> = ({ restart, gameType, onRestartComplete, onSetNumberOfMoves }) => {
   const [cardsDetails, setCardsDetails] = useState<{
-    data: {
-      value: number;
-      id: string;
-      matched: boolean;
-      selected: boolean;
-    }[];
+    data: Card[];
     lastCardValue: number | null;
     lastCardId: null | string;
   }>({
-    data: shuffleArray(fourXfour),
+    data: shuffleArray(gameType.data),
     lastCardValue: null,
     lastCardId: null,
   });
@@ -102,15 +98,24 @@ const CardsBox: React.FC<{
   useEffect(() => {
     if (restart === true) {
       setCardsDetails({
-        data: shuffleArray(fourXfour),
+        data: shuffleArray(gameType.data),
         lastCardId: null,
         lastCardValue: null,
       });
     }
     onRestartComplete();
   }, [restart]);
+  useEffect(() => {
+    setCardsDetails({
+      data: gameType.data,
+      lastCardId: null,
+      lastCardValue: null,
+    });
+  }, [gameType]);
   return (
-    <div className={classes["cardsBox"]}>
+    <div
+      className={`${classes["cardsBox"]} ${classes[`box${gameType.title}`]}`}
+    >
       {cardsDetails.data.map((item, index) => (
         <CartItem
           value={item.value}

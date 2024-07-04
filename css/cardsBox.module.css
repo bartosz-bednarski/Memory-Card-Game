@@ -1,8 +1,19 @@
 .cardsBox {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: auto auto auto auto;
   background-color: yellow;
   gap: 1rem;
   padding: 1rem;
+}
+
+.box4x4 {
+  grid-template-columns: auto auto auto auto;
+}
+
+.box4x5 {
+  grid-template-columns: auto auto auto auto auto;
+}
+
+.box4x6 {
+  grid-template-columns: auto auto auto auto auto auto;
 }/*# sourceMappingURL=cardsBox.module.css.map */

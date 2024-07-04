@@ -1,0 +1,21 @@
+.restart-button {
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 1rem;
+  background-color: red;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: yellow;
+  font-weight: 600;
+  border-radius: 10px;
+  width: 100%;
+  border: 1px solid transparent;
+}
+.restart-button:hover {
+  border: 1px solid red;
+  background-color: black;
+  cursor: pointer;
+}/*# sourceMappingURL=restartButton.module.css.map */
