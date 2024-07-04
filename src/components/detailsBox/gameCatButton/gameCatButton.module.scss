@@ -31,3 +31,9 @@
     color: rgb(13, 240, 13);
   }
 }
+@media only screen and (max-width: 860px) {
+  .game-cat-button {
+    width: 100px;
+    height: 100px;
+  }
+}

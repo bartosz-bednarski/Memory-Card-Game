@@ -18,4 +18,11 @@
   border: 1px solid red;
   background-color: black;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 1110px) {
+  .restart-button {
+    height: -moz-fit-content;
+    height: fit-content;
+  }
 }/*# sourceMappingURL=restartButton.module.css.map */

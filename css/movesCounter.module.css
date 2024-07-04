@@ -22,4 +22,15 @@
   font-weight: 600;
   padding: 10px;
   text-align: center;
+}
+
+@media only screen and (max-width: 1110px) {
+  .moves-counter {
+    width: 130px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .moves-counter {
+    height: 100px;
+  }
 }/*# sourceMappingURL=movesCounter.module.css.map */

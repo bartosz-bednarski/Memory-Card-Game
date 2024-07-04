@@ -23,3 +23,13 @@
     text-align: center;
   }
 }
+@media only screen and (max-width: 1110px) {
+  .timer {
+    width: 130px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .timer {
+    height: 100px;
+  }
+}
