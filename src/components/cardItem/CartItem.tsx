@@ -5,15 +5,14 @@ const CartItem: React.FC<{
   value: number;
   id: string;
   selected: boolean;
-  matched: boolean;
+  preventMultipleClicks: boolean;
   onSetCheckMatch: (value: number, id: string) => void;
-}> = ({ value, id, selected, matched, onSetCheckMatch }) => {
-  const [cartClicked, setCartClicked] = useState(false);
+}> = ({ value, id, selected, preventMultipleClicks, onSetCheckMatch }) => {
   const onClickHandler = () => {
-    setCartClicked(true);
-    onSetCheckMatch(value, id);
+    if (!preventMultipleClicks) {
+      onSetCheckMatch(value, id);
+    }
   };
-  //   console.log(cartClicked, value);
   return (
     <div className={classes["card-item"]} onClick={onClickHandler}>
       {selected && value}
