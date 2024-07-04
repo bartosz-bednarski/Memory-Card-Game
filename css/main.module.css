@@ -9,4 +9,11 @@
   background-color: black;
   flex-direction: row;
   padding: 2rem;
+}
+
+@media only screen and (max-width: 1110px) {
+  .main {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }/*# sourceMappingURL=main.module.css.map */

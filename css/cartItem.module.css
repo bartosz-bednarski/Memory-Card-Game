@@ -11,9 +11,8 @@
 }
 .card-item {
   display: flex;
-  width: 7rem;
+  width: 120px;
   height: 200px;
-  perspective: 1000px;
   align-items: center;
   justify-content: center;
 }
@@ -71,4 +70,26 @@
   font-size: 3rem;
   height: 60%;
   width: 100%;
+}
+
+@media only screen and (max-width: 860px) {
+  .card-item {
+    width: 70px;
+    height: 110px;
+  }
+  .card-item__front__sm-r, .card-item__front__sm-l {
+    height: auto;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .card-item {
+    width: 50px;
+    height: 70px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .card-item {
+    width: 38px;
+    height: 60px;
+  }
 }/*# sourceMappingURL=cartItem.module.css.map */

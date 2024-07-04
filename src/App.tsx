@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import classes from "./main.module.scss";
 import CardsBox from "./components/cardsBox/CardsBox";
