@@ -1,0 +1,22 @@
+.moves-counter {
+  display: flex;
+  flex-direction: column;
+  background-color: yellow;
+  color: black;
+  justify-content: center;
+  width: -moz-max-content;
+  width: max-content;
+  border-radius: 5px;
+}
+.moves-counter__count-value {
+  background-color: black;
+  color: yellow;
+  font-size: 3rem;
+  text-align: center;
+  border: 2px solid yellow;
+}
+.moves-counter__title {
+  color: black;
+  font-weight: 600;
+  padding: 10px;
+}/*# sourceMappingURL=movesCounter.module.css.map */

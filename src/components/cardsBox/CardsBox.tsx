@@ -6,7 +6,8 @@ import { shuffleArray } from "../../utils/scripts/shuffle";
 const CardsBox: React.FC<{
   restart: boolean;
   onRestartComplete: () => void;
-}> = ({ restart, onRestartComplete }) => {
+  onSetNumberOfMoves: () => void;
+}> = ({ restart, onRestartComplete, onSetNumberOfMoves }) => {
   const [cardsDetails, setCardsDetails] = useState<{
     data: {
       value: number;
@@ -17,19 +18,17 @@ const CardsBox: React.FC<{
     lastCardValue: number | null;
     lastCardId: null | string;
   }>({
-    data: fourXfour,
+    data: shuffleArray(fourXfour),
     lastCardValue: null,
     lastCardId: null,
   });
   const [preventMultipleClicks, setPreventMultipleClicks] = useState(false);
-  // const resetPairOfCardsHandler = () => {
-  //   setCheckMatch({ cardValue: null, cardId: null });
-  // };
   const setCheckMatchHandler: (value: number, id: string) => void = (
     value,
     id
   ) => {
     setPreventMultipleClicks(true);
+    onSetNumberOfMoves();
     if (cardsDetails.lastCardValue === null) {
       const newData = cardsDetails.data.map((item) => {
         if (item.id === id) {

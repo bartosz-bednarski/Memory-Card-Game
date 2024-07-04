@@ -1,0 +1,22 @@
+.timer {
+  display: flex;
+  flex-direction: column;
+  background-color: yellow;
+  color: black;
+  justify-content: center;
+  width: -moz-max-content;
+  width: max-content;
+  border-radius: 5px;
+}
+.timer__count-value {
+  background-color: black;
+  color: yellow;
+  font-size: 3rem;
+  text-align: center;
+  border: 2px solid yellow;
+}
+.timer__title {
+  color: black;
+  font-weight: 600;
+  padding: 10px;
+}/*# sourceMappingURL=timer.module.css.map */
