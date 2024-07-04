@@ -1,27 +1,13 @@
 import React, { useEffect, useState } from "react";
 import classes from "./cardsBox.module.scss";
 import CartItem from "../cardItem/CartItem";
-const CardsBox: React.FC = () => {
-  const fourXfour = [
-    { value: 1, id: "c1", matched: false, selected: false },
-    { value: 2, id: "c2", matched: false, selected: false },
-    { value: 3, id: "c3", matched: false, selected: false },
-    { value: 4, id: "c4", matched: false, selected: false },
-    { value: 5, id: "c5", matched: false, selected: false },
-    { value: 6, id: "c6", matched: false, selected: false },
-    { value: 7, id: "c7", matched: false, selected: false },
-    { value: 8, id: "c8", matched: false, selected: false },
-    { value: 1, id: "c11", matched: false, selected: false },
-    { value: 2, id: "c22", matched: false, selected: false },
-    { value: 3, id: "c33", matched: false, selected: false },
-    { value: 4, id: "c44", matched: false, selected: false },
-    { value: 5, id: "c55", matched: false, selected: false },
-    { value: 6, id: "c66", matched: false, selected: false },
-    { value: 7, id: "c77", matched: false, selected: false },
-    { value: 8, id: "c88", matched: false, selected: false },
-  ];
-
-  const [checkMatch, setCheckMatch] = useState<{
+import { fourXfour } from "../../utils/data/gamesTypes";
+import { shuffleArray } from "../../utils/scripts/shuffle";
+const CardsBox: React.FC<{
+  restart: boolean;
+  onRestartComplete: () => void;
+}> = ({ restart, onRestartComplete }) => {
+  const [cardsDetails, setCardsDetails] = useState<{
     data: {
       value: number;
       id: string;
@@ -44,8 +30,8 @@ const CardsBox: React.FC = () => {
     id
   ) => {
     setPreventMultipleClicks(true);
-    if (checkMatch.lastCardValue === null) {
-      const newData = checkMatch.data.map((item) => {
+    if (cardsDetails.lastCardValue === null) {
+      const newData = cardsDetails.data.map((item) => {
         if (item.id === id) {
           return { ...item, selected: true };
         } else {
@@ -53,32 +39,35 @@ const CardsBox: React.FC = () => {
         }
       });
 
-      setCheckMatch({ data: newData, lastCardValue: value, lastCardId: id });
+      setCardsDetails({ data: newData, lastCardValue: value, lastCardId: id });
       setPreventMultipleClicks(false);
     } else {
-      if (checkMatch.lastCardValue === value && checkMatch.lastCardId !== id) {
-        const modifiedData = checkMatch.data.map((item) => {
-          if (item.id === id || item.id === checkMatch.lastCardId) {
+      if (
+        cardsDetails.lastCardValue === value &&
+        cardsDetails.lastCardId !== id
+      ) {
+        const modifiedData = cardsDetails.data.map((item) => {
+          if (item.id === id || item.id === cardsDetails.lastCardId) {
             return { ...item, matched: true, selected: true };
           } else {
             return { ...item };
           }
         });
-        setCheckMatch({
+        setCardsDetails({
           data: modifiedData,
           lastCardId: null,
           lastCardValue: null,
         });
         setPreventMultipleClicks(false);
       } else {
-        const showCardData = checkMatch.data.map((item) => {
+        const showCardData = cardsDetails.data.map((item) => {
           if (item.id === id) {
             return { ...item, selected: true };
           } else {
             return { ...item };
           }
         });
-        setCheckMatch((state) => {
+        setCardsDetails((state) => {
           return {
             data: showCardData,
             lastCardId: state.lastCardId,
@@ -86,14 +75,14 @@ const CardsBox: React.FC = () => {
           };
         });
         setTimeout(() => {
-          const modifiedData = checkMatch.data.map((item) => {
-            if (item.id === id || item.id === checkMatch.lastCardId) {
+          const modifiedData = cardsDetails.data.map((item) => {
+            if (item.id === id || item.id === cardsDetails.lastCardId) {
               return { ...item, matched: false, selected: false };
             } else {
               return { ...item };
             }
           });
-          setCheckMatch({
+          setCardsDetails({
             data: modifiedData,
             lastCardId: null,
             lastCardValue: null,
@@ -102,15 +91,31 @@ const CardsBox: React.FC = () => {
         }, 1000);
       }
     }
-    console.log("newData", checkMatch);
+    console.log("newData", cardsDetails);
   };
-  // useEffect(() => {}, [checkMatch]);
+  useEffect(() => {
+    if (
+      cardsDetails.data.find((item) => item.matched === false) === undefined
+    ) {
+      console.log("GG");
+    }
+  }, [cardsDetails]);
+  useEffect(() => {
+    if (restart === true) {
+      setCardsDetails({
+        data: shuffleArray(fourXfour),
+        lastCardId: null,
+        lastCardValue: null,
+      });
+    }
+    onRestartComplete();
+  }, [restart]);
   return (
     <div className={classes["cardsBox"]}>
-      {checkMatch.data.map((item, index) => (
+      {cardsDetails.data.map((item, index) => (
         <CartItem
           value={item.value}
-          onSetCheckMatch={setCheckMatchHandler}
+          onSetCheckMatchHandler={setCheckMatchHandler}
           id={item.id}
           key={item.id}
           selected={item.selected}

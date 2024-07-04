@@ -6,16 +6,30 @@ const CartItem: React.FC<{
   id: string;
   selected: boolean;
   preventMultipleClicks: boolean;
-  onSetCheckMatch: (value: number, id: string) => void;
-}> = ({ value, id, selected, preventMultipleClicks, onSetCheckMatch }) => {
+  onSetCheckMatchHandler: (value: number, id: string) => void;
+}> = ({
+  value,
+  id,
+  selected,
+  preventMultipleClicks,
+  onSetCheckMatchHandler,
+}) => {
   const onClickHandler = () => {
     if (!preventMultipleClicks) {
-      onSetCheckMatch(value, id);
+      onSetCheckMatchHandler(value, id);
     }
   };
   return (
     <div className={classes["card-item"]} onClick={onClickHandler}>
-      {selected && value}
+      {!selected && <div className={classes["card-item__reverse"]}>?</div>}
+      {selected && (
+        <div className={classes["card-item__front"]}>
+          <span className={classes["card-item__front__sm-r"]}>{value}</span>
+          <span className={classes["card-item__front__lg"]}>{value}</span>
+          <span className={classes["card-item__front__sm-l"]}>{value}</span>
+        </div>
+      )}
+      {/* {selected && value} */}
     </div>
   );
 };
