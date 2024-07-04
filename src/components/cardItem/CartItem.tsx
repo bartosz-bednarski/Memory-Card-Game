@@ -29,7 +29,6 @@ const CartItem: React.FC<{
           <span className={classes["card-item__front__sm-l"]}>{value}</span>
         </div>
       )}
-      {/* {selected && value} */}
     </div>
   );
 };
