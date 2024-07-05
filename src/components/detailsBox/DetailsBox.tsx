@@ -11,12 +11,13 @@ const DetailsBox: React.FC<{
   numberOfMoves: number;
   onSetGameType: (type: GameTypes) => void;
   restart: boolean;
-}> = ({ onSetRestart, numberOfMoves, onSetGameType, restart }) => {
+  gameWon: boolean;
+}> = ({ onSetRestart, numberOfMoves, gameWon, onSetGameType, restart }) => {
   return (
     <div className={classes["details-box"]}>
       <div className={classes["details-box__row-box"]}>
         <MovesCounter numberOfMoves={numberOfMoves} />
-        <Timer restart={restart} />
+        <Timer restart={restart} gameWon={gameWon} />
       </div>
       <div className={classes["details-box__row-box"]}>
         <GameCatButton

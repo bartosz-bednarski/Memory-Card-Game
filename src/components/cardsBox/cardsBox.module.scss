@@ -1,3 +1,11 @@
+@keyframes flash {
+  from {
+    color: red;
+  }
+  to {
+    color: greenyellow;
+  }
+}
 .cardsBox {
   box-sizing: border-box;
   display: grid;
@@ -14,4 +22,21 @@
 }
 .box4x6 {
   grid-template-columns: auto auto auto auto auto auto;
+}
+.win-box {
+  box-sizing: border-box;
+  grid-template-columns: auto;
+  padding: 2rem;
+  width: fit-content;
+  display: flex;
+  min-height: 40vh;
+  font-size: 3rem;
+  color: green;
+  font-weight: 600;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid yellow;
+  border-radius: 10px;
+  animation: flash 1s linear infinite;
 }

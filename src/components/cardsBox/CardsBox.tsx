@@ -8,7 +8,14 @@ const CardsBox: React.FC<{
   gameType: { data: Card[]; title: GameTypes };
   onRestartComplete: () => void;
   onSetNumberOfMoves: () => void;
-}> = ({ restart, gameType, onRestartComplete, onSetNumberOfMoves }) => {
+  onSetGameWon: () => void;
+}> = ({
+  restart,
+  gameType,
+  onRestartComplete,
+  onSetNumberOfMoves,
+  onSetGameWon,
+}) => {
   const [cardsDetails, setCardsDetails] = useState<{
     data: Card[];
     lastCardValue: number | null;
@@ -24,7 +31,12 @@ const CardsBox: React.FC<{
     id
   ) => {
     setPreventMultipleClicks(true);
-    onSetNumberOfMoves();
+    if (
+      cardsDetails.data.find((item) => item.matched === false) !== undefined
+    ) {
+      onSetNumberOfMoves();
+    }
+
     if (cardsDetails.lastCardValue === null) {
       const newData = cardsDetails.data.map((item) => {
         if (item.id === id) {
@@ -86,12 +98,12 @@ const CardsBox: React.FC<{
         }, 1000);
       }
     }
-    console.log("newData", cardsDetails);
   };
   useEffect(() => {
     if (
       cardsDetails.data.find((item) => item.matched === false) === undefined
     ) {
+      onSetGameWon();
       console.log("GG");
     }
   }, [cardsDetails]);
@@ -113,20 +125,36 @@ const CardsBox: React.FC<{
     });
   }, [gameType]);
   return (
-    <div
-      className={`${classes["cardsBox"]} ${classes[`box${gameType.title}`]}`}
-    >
-      {cardsDetails.data.map((item, index) => (
-        <CartItem
-          value={item.value}
-          onSetCheckMatchHandler={setCheckMatchHandler}
-          id={item.id}
-          key={item.id}
-          selected={item.selected}
-          preventMultipleClicks={preventMultipleClicks}
-        />
-      ))}
-    </div>
+    <>
+      {cardsDetails.data.find((item) => item.matched === false) !==
+        undefined && (
+        <div
+          className={`${classes["cardsBox"]} ${
+            classes[`box${gameType.title}`]
+          }`}
+        >
+          {cardsDetails.data.map((item, index) => (
+            <CartItem
+              value={item.value}
+              onSetCheckMatchHandler={setCheckMatchHandler}
+              id={item.id}
+              key={item.id}
+              selected={item.selected}
+              preventMultipleClicks={preventMultipleClicks}
+            />
+          ))}
+        </div>
+      )}
+
+      {cardsDetails.data.find((item) => item.matched === false) ===
+        undefined && (
+        <div className={classes["win-box"]}>
+          You Win!
+          <br />
+          Good Game!
+        </div>
+      )}
+    </>
   );
 };
 export default CardsBox;

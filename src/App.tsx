@@ -12,27 +12,29 @@ function App() {
     title: "4x4",
     data: game4x4,
   });
+  const [gameWon, setGameWon] = useState(false);
   const setNumberOfMovesHandler = () => {
     setNumberOfMoves((state) => (state += 1));
   };
   const restartTheGameHandler = () => {
     setRestart(true);
+    setGameWon(false);
     setNumberOfMoves(0);
   };
   const setGameTypeHandler: (type: GameTypes) => void = (type) => {
     if (type === "4x4") {
+      setGameWon(false);
       setGameType({ title: "4x4", data: game4x4 });
     }
     if (type === "4x5") {
+      setGameWon(false);
       setGameType({ title: "4x5", data: game4x5 });
     }
     if (type === "4x6") {
+      setGameWon(false);
       setGameType({ title: "4x6", data: game4x6 });
     }
   };
-  console.log(gameType);
-  // useEffect(() => {}, [restart]);
-  console.log(numberOfMoves);
   return (
     <div className={classes.main}>
       <CardsBox
@@ -40,12 +42,14 @@ function App() {
         onRestartComplete={() => setRestart(false)}
         onSetNumberOfMoves={setNumberOfMovesHandler}
         gameType={gameType}
+        onSetGameWon={() => setGameWon(true)}
       />
       <DetailsBox
         onSetRestart={restartTheGameHandler}
         numberOfMoves={numberOfMoves}
         onSetGameType={setGameTypeHandler}
         restart={restart}
+        gameWon={gameWon}
       />
     </div>
   );
